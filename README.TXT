@@ -12,6 +12,29 @@ so I didn't want to wait until the programmer arrives from there, too.
 
 Re-uses a bit of TI's demo code for the debugging interface.
 
+
+Building:
+---------
+
+Make sure you have git and an arm-none-eabi toolchain ready.
+
+git submodule init
+git submodule update
+make
+
+Flash the binary build/ch.bin to your STM32F1xx. Depending on if you
+do this using the ST-Link or the bootloader plus UART, it's
+
+st-flash write build/ch.bin 0x8000000
+
+or 
+
+stm32flash -w build/ch.bin -v /dev/tty...
+
+
+Usage:
+------
+
 You need to connect the CC2531 debug port to the STM32F1xx as follows:
 
       1 +------+------+
@@ -29,6 +52,8 @@ You need to connect the CC2531 debug port to the STM32F1xx as follows:
 
 So - all the signals will be run out of the STM32's PA0,1,2 outputs.
 Just power the CC2531 stick via USB. Do *not* connect any VCC lines.
+
+Plug in your flashed STM32F1xx.
 
 Use e.g. flash.sh in order to flash a CC2531. Syntax:
 
